@@ -1,6 +1,8 @@
 package net.portalblock.creativeblockz.commands;
 
+import com.worldcretornica.plotme.PlotMe;
 import net.portalblock.creativeblockz.CreativeBlockz;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,6 +40,7 @@ public class SetLobby implements CommandExecutor {
                 }catch (IOException e){
                     e.printStackTrace();
                 }
+                p.sendMessage(PlotMe.PREFIX+ ChatColor.GOLD+"Lobby world spawn set!");
             }
         }
         return true;

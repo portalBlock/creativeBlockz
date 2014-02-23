@@ -4,6 +4,7 @@ import com.worldcretornica.plotme.PlotGen;
 import com.worldcretornica.plotme.PlotManager;
 import com.worldcretornica.plotme.PlotMe;
 import net.portalblock.creativeblockz.commands.CBCommand;
+import net.portalblock.creativeblockz.commands.Spawn;
 import net.portalblock.creativeblockz.listeners.JoinListener;
 import net.portalblock.creativeblockz.worlds.LobbyGen;
 import net.portalblock.creativeblockz.worlds.LobbyWorld;
@@ -36,7 +37,7 @@ public class CreativeBlockz extends JavaPlugin {
         instance = this;
 
         getCommand("creativeblockz").setExecutor(new CBCommand());
-
+        getCommand("spawn").setExecutor(new Spawn());
         //TODO: Register the world commands
 
         //Register JoinListener
