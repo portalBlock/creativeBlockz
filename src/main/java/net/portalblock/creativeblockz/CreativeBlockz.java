@@ -35,7 +35,7 @@ public class CreativeBlockz extends JavaPlugin {
     @Override
     public void onEnable(){
         instance = this;
-
+        saveResource("cbConfig.yml", false);
         getCommand("creativeblockz").setExecutor(new CBCommand());
         getCommand("spawn").setExecutor(new Spawn());
         //TODO: Register the world commands
