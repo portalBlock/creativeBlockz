@@ -5,6 +5,10 @@ import com.worldcretornica.plotme.PlotManager;
 import com.worldcretornica.plotme.PlotMe;
 import net.portalblock.creativeblockz.commands.CBCommand;
 import net.portalblock.creativeblockz.worlds.LobbyGen;
+import net.portalblock.creativeblockz.worlds.LobbyWorld;
+import net.portalblock.creativeblockz.worlds.MemberWorld;
+import net.portalblock.creativeblockz.worlds.RankWorld;
+import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,6 +17,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CreativeBlockz extends JavaPlugin {
     public static CreativeBlockz instance;
+    public static World memberWorld;
+    public static World rankWorld;
+    public static World lobby;
 
     @Override
     public void onEnable(){
@@ -20,11 +27,20 @@ public class CreativeBlockz extends JavaPlugin {
 
         getCommand("creativeblockz").setExecutor(new CBCommand());
 
-        //TODO: Register the world commands and make worlds on startup
+        //TODO: Register the world commands and register the join listeners
 
         //STARTUP PLOTME
         PlotMe plotMe = new PlotMe();
         plotMe.onEnable();
+
+        getServer().getScheduler().runTask(this, new Runnable() {
+            @Override
+            public void run() {
+                new LobbyWorld();
+                new MemberWorld();
+                new RankWorld();
+            }
+        });
     }
 
     @Override
