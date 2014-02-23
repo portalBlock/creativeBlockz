@@ -29,7 +29,7 @@ public class JoinListener implements Listener {
                 String name;
                 name = cbConfig.getString("lobby.world");
                 World w = CreativeBlockz.instance.getServer().getWorld(name);
-                x = cbConfig.getDouble("lobby,x");
+                x = cbConfig.getDouble("lobby.x");
                 y = cbConfig.getDouble("lobby.y");
                 z = cbConfig.getDouble("lobby.z");
                 yaw = cbConfig.getDouble("lobby.yaw");
