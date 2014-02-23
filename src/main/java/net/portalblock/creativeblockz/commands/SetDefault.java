@@ -27,6 +27,7 @@ public class SetDefault implements CommandExecutor {
             if(p.hasPermission("creativeblockz.setdefault")||p.isOp()){
                 Location l = p.getLocation();
                 CreativeBlockz.defaultL = l;
+                cbConfig.set("default.world", l.getWorld().getName());
                 cbConfig.set("default.x", l.getX());
                 cbConfig.set("default.y", l.getY());
                 cbConfig.set("default.z", l.getZ());

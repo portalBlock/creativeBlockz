@@ -27,6 +27,7 @@ public class SetRank implements CommandExecutor {
             if(p.hasPermission("creativeblockz.setrank")||p.isOp()){
                 Location l = p.getLocation();
                 CreativeBlockz.rankL = l;
+                cbConfig.set("rank.world", l.getWorld().getName());
                 cbConfig.set("rank.x", l.getX());
                 cbConfig.set("rank.y", l.getY());
                 cbConfig.set("rank.z", l.getZ());
