@@ -13,27 +13,23 @@ import java.io.File;
  */
 public class RankWorld {
     public RankWorld(){
-        if(CreativeBlockz.instance.getServer().getWorld("rankWorld") != null){
-            CreativeBlockz.instance.getLogger().info("rankWorld Loaded, no need to go further.");
+        if(CreativeBlockz.instance.getServer().getWorld("rankBlockz") != null){
+            CreativeBlockz.instance.getLogger().info("rankBlockz is already loaded, why is this even being called???");
             return;
         }
 
-        File dir = new File("/");
-        for(File file : dir.listFiles()){
-            if(file.getName().equals("rankWorld")&&file.isDirectory()){
-                CreativeBlockz.instance.getLogger().info("rankWorld exists :D I will create an instance now.");
-                WorldCreator wc = new WorldCreator("rankWorld");
-                wc.generator(new PlotGen(PlotManager.getMap("rankWorld")));
-                wc.environment(World.Environment.NORMAL);
-                CreativeBlockz.rankWorld = wc.createWorld();
-                return;
-            }
-        }
+        CreativeBlockz.instance.getLogger().info("Creating instance of rankBlockz now :D");
+        WorldCreator worldCreator = new WorldCreator("rankBlockz");
+        worldCreator.generator(new PlotGen(PlotManager.getMap("rankBlockz")));
+        worldCreator.environment(World.Environment.NORMAL);
+        worldCreator.generateStructures(false);
+        World world = worldCreator.createWorld();
+        world.setSpawnFlags(false, false);
+        world.setPVP(false);
+        world.setStorm(false);
+        world.setThundering(false);
+        world.setAutoSave(true);
 
-        CreativeBlockz.instance.getLogger().info("rankWorld doesn't exist, I will make one now :D");
-        WorldCreator wc = new WorldCreator("rankWorld");
-        wc.generator(new PlotGen(PlotManager.getMap("rankWorld")));
-        wc.environment(World.Environment.NORMAL);
-        CreativeBlockz.rankWorld = wc.createWorld();
+        CreativeBlockz.instance.rankWorld = world;
     }
 }
