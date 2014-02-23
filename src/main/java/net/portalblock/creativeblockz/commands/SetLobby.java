@@ -26,6 +26,7 @@ public class SetLobby implements CommandExecutor {
             Player p = (Player) sender;
             if(p.hasPermission("creativeblockz.setlobby")||p.isOp()){
                 Location l = p.getLocation();
+                CreativeBlockz.lobbyL = l;
                 cbConfig.set("lobby.x", l.getX());
                 cbConfig.set("lobby.y", l.getY());
                 cbConfig.set("lobby.z", l.getZ());

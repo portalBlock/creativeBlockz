@@ -9,9 +9,14 @@ import net.portalblock.creativeblockz.worlds.LobbyGen;
 import net.portalblock.creativeblockz.worlds.LobbyWorld;
 import net.portalblock.creativeblockz.worlds.MemberWorld;
 import net.portalblock.creativeblockz.worlds.RankWorld;
+import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 /**
  * Created by portalBlock on 2/22/14.
@@ -21,6 +26,10 @@ public class CreativeBlockz extends JavaPlugin {
     public static World memberWorld;
     public static World rankWorld;
     public static World lobby;
+
+    public static Location lobbyL;
+    public static Location defaultL;
+    public static Location rankL;
 
     @Override
     public void onEnable(){
@@ -45,6 +54,7 @@ public class CreativeBlockz extends JavaPlugin {
                 new RankWorld();
             }
         });
+        loadSpawns();
     }
 
     @Override
@@ -61,6 +71,46 @@ public class CreativeBlockz extends JavaPlugin {
         {
             PlotMe.logger.warning(PlotMe.PREFIX + "Configuration not found for PlotMe world '" + worldname + "' Using defaults");
             return new PlotGen();
+        }
+    }
+
+
+    private void loadSpawns(){
+        //Register the config files
+        File file = new File(CreativeBlockz.instance.getDataFolder(), "cbConfig.yml");
+        FileConfiguration cbConfig = YamlConfiguration.loadConfiguration(file);
+
+        //Load spawn for lobby.
+        if(cbConfig.getBoolean("lobby.isSet")){
+            String w = cbConfig.getString("lobby.world");
+            double x = cbConfig.getDouble("lobby.x");
+            double y = cbConfig.getDouble("lobby.y");
+            double z = cbConfig.getDouble("lobby.z");
+            double yaw = cbConfig.getDouble("lobby.yaw");
+            double pitch = cbConfig.getDouble("lobby.pitch");
+            lobbyL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
+        }
+
+        //Load spawn for defaultBlockz.
+        if(cbConfig.getBoolean("default.isSet")){
+            String w = cbConfig.getString("default.world");
+            double x = cbConfig.getDouble("default.x");
+            double y = cbConfig.getDouble("default.y");
+            double z = cbConfig.getDouble("default.z");
+            double yaw = cbConfig.getDouble("default.yaw");
+            double pitch = cbConfig.getDouble("default.pitch");
+            defaultL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
+        }
+
+        //Load spawn for rankBlockz.
+        if(cbConfig.getBoolean("rank.isSet")){
+            String w = cbConfig.getString("rank.world");
+            double x = cbConfig.getDouble("rank.x");
+            double y = cbConfig.getDouble("rank.y");
+            double z = cbConfig.getDouble("rank.z");
+            double yaw = cbConfig.getDouble("rank.yaw");
+            double pitch = cbConfig.getDouble("rank.pitch");
+            rankL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
         }
     }
 }
