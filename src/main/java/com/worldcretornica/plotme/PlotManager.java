@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import net.portalblock.creativeblockz.CreativeBlockz;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -1580,7 +1581,7 @@ public class PlotManager
 	    	final int z2 = top.getBlockZ();
 			final String wname = w.getName();
 	    	
-			Bukkit.getScheduler().runTaskAsynchronously(PlotMe.self, new Runnable() 
+			Bukkit.getScheduler().runTaskAsynchronously(CreativeBlockz.instance, new Runnable()
 			{	
 				public void run() 
 				{
