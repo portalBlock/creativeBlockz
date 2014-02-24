@@ -38,7 +38,9 @@ public class CreativeBlockz extends JavaPlugin {
         saveResource("cbConfig.yml", false);
         getCommand("creativeblockz").setExecutor(new CBCommand());
         getCommand("spawn").setExecutor(new Spawn());
-        //TODO: Register the world commands
+        //TODO: Make spawn and inter-world commands work
+        //TODO: Add world permissions in
+        //TODO: Add piston griefing alarms
 
         //Register JoinListener
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
@@ -53,9 +55,10 @@ public class CreativeBlockz extends JavaPlugin {
                 new LobbyWorld();
                 new MemberWorld();
                 new RankWorld();
+                loadSpawns();
             }
         });
-        loadSpawns();
+
     }
 
     @Override
