@@ -4,6 +4,8 @@ import com.worldcretornica.plotme.PlotGen;
 import com.worldcretornica.plotme.PlotManager;
 import com.worldcretornica.plotme.PlotMe;
 import net.portalblock.creativeblockz.commands.CBCommand;
+import net.portalblock.creativeblockz.commands.Donor;
+import net.portalblock.creativeblockz.commands.Member;
 import net.portalblock.creativeblockz.commands.Spawn;
 import net.portalblock.creativeblockz.listeners.JoinListener;
 import net.portalblock.creativeblockz.worlds.LobbyGen;
@@ -38,6 +40,8 @@ public class CreativeBlockz extends JavaPlugin {
         saveResource("cbConfig.yml", false);
         getCommand("creativeblockz").setExecutor(new CBCommand());
         getCommand("spawn").setExecutor(new Spawn());
+        getCommand("donor").setExecutor(new Donor());
+        getCommand("member").setExecutor(new Member());
         //TODO: Make spawn and inter-world commands work
         //TODO: Add world permissions in
         //TODO: Add piston griefing alarms
@@ -93,7 +97,7 @@ public class CreativeBlockz extends JavaPlugin {
             double yaw = cbConfig.getDouble("lobby.yaw");
             double pitch = cbConfig.getDouble("lobby.pitch");
             lobbyL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
-            getLogger().info(lobbyL.toString());
+            getLogger().info("Spawn for lobby world loaded at: "+lobbyL.toString());
         }
 
         //Load spawn for defaultBlockz.
@@ -105,6 +109,7 @@ public class CreativeBlockz extends JavaPlugin {
             double yaw = cbConfig.getDouble("default.yaw");
             double pitch = cbConfig.getDouble("default.pitch");
             defaultL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
+            getLogger().info("Spawn for member world loaded at: "+defaultL.toString());
         }
 
         //Load spawn for rankBlockz.
@@ -116,6 +121,7 @@ public class CreativeBlockz extends JavaPlugin {
             double yaw = cbConfig.getDouble("rank.yaw");
             double pitch = cbConfig.getDouble("rank.pitch");
             rankL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
+            getLogger().info("Spawn for rank world loaded at: "+rankL.toString());
         }
     }
 }
