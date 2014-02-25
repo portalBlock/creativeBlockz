@@ -272,7 +272,7 @@ public class PlotMe{
 	{
 		PluginDescriptionFile pdfFile = CreativeBlockz.instance.getDescription();
 		NAME = pdfFile.getName();
-		PREFIX = ChatColor.BLUE + "[" + NAME + "] " + ChatColor.RESET;
+		PREFIX = PREFIX = ChatColor.translateAlternateColorCodes('&', "&7[&bcreativeBlockz&7] &6");;
 		VERSION = pdfFile.getVersion();
 		WEBSITE = pdfFile.getWebsite();
 		configpath = CreativeBlockz.instance.getDataFolder().getAbsolutePath();
