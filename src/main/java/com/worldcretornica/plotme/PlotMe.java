@@ -581,13 +581,13 @@ public class PlotMe{
 			return playersignoringwelimit.contains(p.getName());
 	}
 		
-	public static int getPlotLimit(Player p)
+	public static int getPlotLimit(Player p, String world)
 	{
 		int max = -2;
 		
 		int maxlimit = 255;
 		
-		if(p.hasPermission("plotme.limit.*"))
+		if(p.hasPermission("plotme."+world+".limit.*"))
 		{
 			return -1;
 		}
@@ -595,7 +595,7 @@ public class PlotMe{
 		{
 			for(int ctr = 0; ctr < maxlimit; ctr++)
 			{
-				if(p.hasPermission("plotme.limit." + ctr))
+				if(p.hasPermission("plotme."+world+".limit." + ctr))
 				{
 					max = ctr;
 				}

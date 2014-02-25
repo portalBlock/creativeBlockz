@@ -70,7 +70,10 @@ public class PMCommand implements CommandExecutor
 			else
 			{
 				Player p = (Player)s;
-				
+				if(p.getWorld().getName().equals("lobbyWorld")){
+                    p.sendMessage(PlotMe.PREFIX+ChatColor.RED+"This is not the plot world, please to /member to get started.");
+                    return true;
+                }
 				if(args.length == 0)
 				{
 					return showhelp(p, 1);
@@ -376,12 +379,12 @@ public class PMCommand implements CommandExecutor
 							}
 							else
 							{
-								int plotlimit = PlotMe.getPlotLimit(p);
+								int plotlimit = PlotMe.getPlotLimit(p, p.getWorld().getName());
 								
 								if(plotlimit != -1 && PlotManager.getNbOwnedPlot(p) >= plotlimit)
 								{
 									Send(p, C("MsgAlreadyReachedMaxPlots") + " (" + 
-											PlotManager.getNbOwnedPlot(p) + "/" + PlotMe.getPlotLimit(p) + "). " + 
+											PlotManager.getNbOwnedPlot(p) + "/" + PlotMe.getPlotLimit(p, p.getWorld().getName()) + "). " +
 											C("WordUse") + " " + RED + "/plotme " + C("CommandHome") + RESET + " " + C("MsgToGetToIt"));
 								}
 								else
@@ -1531,7 +1534,7 @@ public class PMCommand implements CommandExecutor
 						w = PlotManager.getFirstWorld();
 					}
 
-					int maxplots = PlotMe.getPlotLimit(p);
+					int maxplots = PlotMe.getPlotLimit(p, w.getName());
 					int ownedplots = PlotManager.getNbOwnedPlot(p, w);
 					
 					if(maxplots == -1)
@@ -1863,6 +1866,10 @@ public class PMCommand implements CommandExecutor
 
 	private boolean auto(Player p, String[] args)
 	{
+        if(p.getWorld().getName().equals("rankBlockz")&&!p.hasPermission("creativeblockz.rank")){
+            p.sendMessage(PlotMe.PREFIX+ChatColor.GOLD+"This is the donor world, please donate to a supported rank to get a plot here!");
+            return true;
+        }
 		if (PlotMe.cPerms(p, "PlotMe.use.auto"))
 		{			
 			if(!PlotManager.isPlotWorld(p) && !PlotMe.allowWorldTeleport)
@@ -1872,7 +1879,8 @@ public class PMCommand implements CommandExecutor
 			else
 			{
 				World w;
-				
+				w = p.getWorld();
+                /*
 				if(!PlotManager.isPlotWorld(p) && PlotMe.allowWorldTeleport)
 				{
 					if(args.length == 2)
@@ -1893,7 +1901,7 @@ public class PMCommand implements CommandExecutor
 				else
 				{
 					w = p.getWorld();
-				}
+				}*/
 				
 				if(w == null)
 				{
@@ -1901,9 +1909,9 @@ public class PMCommand implements CommandExecutor
 				}
 				else
 				{
-					if(PlotManager.getNbOwnedPlot(p, w) >= PlotMe.getPlotLimit(p) && !PlotMe.cPerms(p, "PlotMe.admin"))
+					if(PlotManager.getNbOwnedPlot(p, w) >= PlotMe.getPlotLimit(p, w.getName()) && !PlotMe.cPerms(p, "PlotMe.admin"))
 						Send(p, RED + C("MsgAlreadyReachedMaxPlots") + " (" + 
-								PlotManager.getNbOwnedPlot(p, w) + "/" + PlotMe.getPlotLimit(p) + "). " + C("WordUse") + " " + RED + "/plotme " + C("CommandHome") + RESET + " " + C("MsgToGetToIt"));
+								PlotManager.getNbOwnedPlot(p, w) + "/" + PlotMe.getPlotLimit(p, w.getName()) + "). " + C("WordUse") + " " + RED + "/plotme " + C("CommandHome") + RESET + " " + C("MsgToGetToIt"));
 					else
 					{
 						PlotMapInfo pmi = PlotManager.getMap(w);
@@ -2008,12 +2016,12 @@ public class PMCommand implements CommandExecutor
 						}
 					}
 					
-					int plotlimit = PlotMe.getPlotLimit(p);
+					int plotlimit = PlotMe.getPlotLimit(p, p.getWorld().getName());
 					
 					if(playername == p.getName() && plotlimit != -1 && PlotManager.getNbOwnedPlot(p) >= plotlimit)
 					{
 						Send(p, RED + C("MsgAlreadyReachedMaxPlots") + " (" + 
-								PlotManager.getNbOwnedPlot(p) + "/" + PlotMe.getPlotLimit(p) + "). " + C("WordUse") + " " + RED + "/plotme " + C("CommandHome") + RESET + " " + C("MsgToGetToIt"));
+								PlotManager.getNbOwnedPlot(p) + "/" + PlotMe.getPlotLimit(p, p.getWorld().getName()) + "). " + C("WordUse") + " " + RED + "/plotme " + C("CommandHome") + RESET + " " + C("MsgToGetToIt"));
 					}
 					else
 					{
