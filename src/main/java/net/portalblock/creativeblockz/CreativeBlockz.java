@@ -93,6 +93,7 @@ public class CreativeBlockz extends JavaPlugin {
             double yaw = cbConfig.getDouble("lobby.yaw");
             double pitch = cbConfig.getDouble("lobby.pitch");
             lobbyL = new Location(getServer().getWorld(w), x, y, z, (float) yaw, (float) pitch);
+            getLogger().info(lobbyL.toString());
         }
 
         //Load spawn for defaultBlockz.
