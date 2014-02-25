@@ -20,12 +20,7 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(final PlayerJoinEvent e){
         e.setJoinMessage("");
-        File cfg = new File("/plugins/creativeBlockz/cbConfig.yml");
-        FileConfiguration cbConfig = YamlConfiguration.loadConfiguration(cfg);
         if(!e.getPlayer().hasPlayedBefore()){
-            if(!cbConfig.getBoolean("lobby.isSet")){
-                return;
-            }
             final Location loc = CreativeBlockz.lobbyL;
             CreativeBlockz.instance.getServer().getScheduler().scheduleSyncDelayedTask(CreativeBlockz.instance, new Runnable() {
                 @Override
