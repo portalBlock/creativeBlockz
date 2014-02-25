@@ -7,6 +7,7 @@ import net.portalblock.creativeblockz.commands.CBCommand;
 import net.portalblock.creativeblockz.commands.Donor;
 import net.portalblock.creativeblockz.commands.Member;
 import net.portalblock.creativeblockz.commands.Spawn;
+import net.portalblock.creativeblockz.listeners.GeneralListener;
 import net.portalblock.creativeblockz.listeners.JoinListener;
 import net.portalblock.creativeblockz.worlds.LobbyGen;
 import net.portalblock.creativeblockz.worlds.LobbyWorld;
@@ -42,12 +43,6 @@ public class CreativeBlockz extends JavaPlugin {
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("donor").setExecutor(new Donor());
         getCommand("member").setExecutor(new Member());
-        //TODO: Make spawn and inter-world commands work
-        //TODO: Add world permissions in
-        //TODO: Add piston griefing alarms
-
-        //Register JoinListener
-        getServer().getPluginManager().registerEvents(new JoinListener(), this);
 
         //STARTUP PLOTME
         PlotMe plotMe = new PlotMe();
@@ -62,6 +57,13 @@ public class CreativeBlockz extends JavaPlugin {
                 loadSpawns();
             }
         });
+
+
+        //Register JoinListener
+        getServer().getPluginManager().registerEvents(new JoinListener(), this);
+
+        //Register the GeneralListener
+        getServer().getPluginManager().registerEvents(new GeneralListener(), this);
 
     }
 
